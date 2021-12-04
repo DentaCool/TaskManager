@@ -12,11 +12,13 @@ def task_priority_validator(task_data: dict) -> bool:
     Returns:
         bool: True if priority available
     """
-    return not (
-        task_manager_models.Task.objects.prefetch_related("tags")
-        .filter(tags__in=task_data["tags"], priority=task_data["priority"])
-        .exists()
-    )
+    if tags := task_data.get("tags"):
+        return not (
+            task_manager_models.Task.objects.prefetch_related("tags")
+            .filter(tags__in=task_data["tags"], priority=task_data["priority"])
+            .exists()
+        )
+    return True
 
 
 def task_status_validator(current_status: Union[enums.Status, str], new_status: Union[enums.Status, str]) -> bool:
