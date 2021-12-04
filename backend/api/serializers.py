@@ -19,16 +19,19 @@ class TaskSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError({"error": "Wrong status ordering!"})
 
 
+class TaskListSerializer(TaskSerializer):
+    class Meta:
+        model = task_manager_models.Task
+        exclude = ("tags",)
+
+
 class TagListSerializer(serializers.ModelSerializer):
     class Meta:
         model = task_manager_models.Tag
-        fields = (
-            "id",
-            "name",
-        )
+        fields = "__all__"
 
 
-class TagSerializer(TagListSerializer):
+class TagSerializer(serializers.ModelSerializer):
     tasks = TaskSerializer(many=True)
 
     class Meta:
