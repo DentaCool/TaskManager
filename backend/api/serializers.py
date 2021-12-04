@@ -1,5 +1,5 @@
 from backend import models as task_manager_models
-from backend.validators import task_priority_validator, task_status_validator
+from backend.service.validators import task_priority_validator, task_status_validator
 from rest_framework import serializers
 
 

@@ -1,8 +1,7 @@
 from typing import Union
 
+from backend import enums
 from backend import models as task_manager_models
-
-from . import enums
 
 
 def task_priority_validator(task_data: dict) -> bool:
