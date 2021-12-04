@@ -6,7 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 django-rest-framework = "*"
-psycopg2-binary = "*"
+drf-extensions = "*"
+django-filter = "*"
 
 [dev-packages]
 black = "*"
