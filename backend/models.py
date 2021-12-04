@@ -29,7 +29,7 @@ class Task(models.Model):
         default=enums.Status.backlog,
     )
     update = models.DateTimeField(auto_now=True)
-    tags = models.ManyToManyField(Tag, related_name="task")
+    tags = models.ManyToManyField(Tag, related_name="tasks")
 
     def __str__(self) -> str:
         return f"{self.title}|{self.status}"

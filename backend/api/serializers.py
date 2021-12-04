@@ -20,7 +20,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class TagSerializer(serializers.ModelSerializer):
-    task = serializers.StringRelatedField(many=True)
+    tasks = TaskSerializer(many=True)
 
     class Meta:
         model = task_manager_models.Tag
