@@ -10,9 +10,13 @@ class TaskSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError({"error": "Task with same priority already exists!"})
 
     def update(self, instance, validated_data):
-        if task_status_validator(instance.status, validated_data["status"]):
+        if task_status_validator(instance.status, validated_data["status"]) and task_priority_validator(
+            validated_data
+        ):
             return super().update(instance, validated_data)
-        raise serializers.ValidationError({"error": "Wrong status ordering!"})
+        raise serializers.ValidationError(
+            {"error": "Wrong status ordering or Task with same priority already exists!!"}
+        )
 
     class Meta:
         model = task_manager_models.Task
