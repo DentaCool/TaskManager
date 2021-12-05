@@ -4,10 +4,6 @@ from rest_framework import serializers
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = task_manager_models.Task
-        fields = "__all__"
-
     def create(self, validated_data):
         if task_priority_validator(validated_data):
             return super().create(validated_data)
@@ -17,6 +13,10 @@ class TaskSerializer(serializers.ModelSerializer):
         if task_status_validator(instance.status, validated_data["status"]):
             return super().update(instance, validated_data)
         raise serializers.ValidationError({"error": "Wrong status ordering!"})
+
+    class Meta:
+        model = task_manager_models.Task
+        fields = "__all__"
 
 
 class TaskListSerializer(TaskSerializer):

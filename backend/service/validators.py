@@ -15,7 +15,7 @@ def task_priority_validator(task_data: dict) -> bool:
     if tags := task_data.get("tags"):
         return not (
             task_manager_models.Task.objects.prefetch_related("tags")
-            .filter(tags__in=task_data["tags"], priority=task_data["priority"])
+            .filter(tags__in=tags, priority=task_data["priority"])
             .exists()
         )
     return True
